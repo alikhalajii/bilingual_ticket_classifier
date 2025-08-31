@@ -49,7 +49,7 @@ class MultiTaskTrainer(Trainer):
         loss_fn = torch.nn.CrossEntropyLoss()
         loss_queue = loss_fn(logits_queue, labels_queue)
         loss_type = loss_fn(logits_type, labels_type)
-        loss = loss_queue + loss_type
+        loss = 0.6 * loss_queue + 0.4 * loss_type
 
         return (loss, outputs) if return_outputs else loss
 

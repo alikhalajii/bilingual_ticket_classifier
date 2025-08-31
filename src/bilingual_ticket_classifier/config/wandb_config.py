@@ -14,6 +14,6 @@ def load_wandb_config():
         "DATASET_NAME": os.getenv("DATASET_NAME", "ale-dp/bilingual-ticket-classification"),
         "EPOCHS": int(os.getenv("EPOCHS", 10)),
         "BATCH_SIZE": int(os.getenv("BATCH_SIZE", 16)),
-        "LEARNING_RATE": float(os.getenv("LEARNING_RATE", 3e-5)),
+        "LEARNING_RATE": float(os.getenv("LEARNING_RATE", 2e-5)),
         "WEIGHT_DECAY": float(os.getenv("WEIGHT_DECAY", 0.01))
     }
