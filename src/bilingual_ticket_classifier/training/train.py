@@ -4,7 +4,7 @@ from transformers import TrainingArguments, EarlyStoppingCallback
 
 from bilingual_ticket_classifier.processing.data_processor import DataProcessor
 from bilingual_ticket_classifier.models.multi_head_classifier import MultiHeadTicketClassifier
-from bilingual_ticket_classifier.training.trainer import MultiTaskTrainer, MultiTaskCollator
+from bilingual_ticket_classifier.training.trainer import MultiTaskTrainer, MultiTaskCollator, compute_metrics
 from bilingual_ticket_classifier.config.wandb_config import load_wandb_config
 
 
@@ -58,7 +58,7 @@ trainer = MultiTaskTrainer(
     eval_dataset=tokenized_datasets["validation"],
     tokenizer=processor.tokenizer,
     data_collator=collator,
-    compute_metrics=None,
+    compute_metrics=compute_metrics,
     callbacks=[EarlyStoppingCallback(early_stopping_patience=3)]
 )
 

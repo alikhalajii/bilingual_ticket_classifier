@@ -1,8 +1,27 @@
 from transformers import Trainer, DataCollatorWithPadding
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 import torch
+import numpy as np
+from sklearn.metrics import accuracy_score, f1_score
 
 
+def compute_metrics(eval_preds):
+    logits_queue, logits_type = eval_preds.predictions
+    labels_queue, labels_type = eval_preds.label_ids
+
+    preds_queue = np.argmax(logits_queue, axis=1)
+    preds_type = np.argmax(logits_type, axis=1)
+
+    metrics = {
+        "eval_accuracy_queue": accuracy_score(labels_queue, preds_queue),
+        "eval_accuracy_type": accuracy_score(labels_type, preds_type),
+        "eval_f1_queue": f1_score(labels_queue, preds_queue, average="weighted"),
+        "eval_f1_type": f1_score(labels_type, preds_type, average="weighted"),
+    }
+
+    return metrics
+
+    
 class MultiTaskCollator(DataCollatorWithPadding):
     def __call__(self, features):
         label_queue = [f["label_queue"] for f in features]
