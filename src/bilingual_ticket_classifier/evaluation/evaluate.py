@@ -2,14 +2,12 @@ import wandb
 from transformers import TrainingArguments, EarlyStoppingCallback
 import torch
 import os
-from dotenv import load_dotenv
 
 from bilingual_ticket_classifier.training.trainer import MultiTaskTrainer, MultiTaskCollator, compute_metrics
 from bilingual_ticket_classifier.processing.data_processor import DataProcessor
 from bilingual_ticket_classifier.models.multi_head_classifier import MultiHeadTicketClassifier
 from bilingual_ticket_classifier.config.wandb_config import load_wandb_config
 
-load_dotenv()
 
 # Load config
 config = load_wandb_config()
@@ -26,7 +24,7 @@ num_labels_queue = len(processor.label_encoder_queue.classes_)
 num_labels_type = len(processor.label_encoder_type.classes_)
 
 # Load model
-model_path = os.getenv("FINETUNED_MODEL_PATH")
+model_path = config["FINETUNED_MODEL_PATH"]
 encoder_path = os.path.join(model_path, "encoder")
 
 model = MultiHeadTicketClassifier(
@@ -47,7 +45,7 @@ training_args = TrainingArguments(
 trainer = MultiTaskTrainer(
     model=model,
     args=training_args,
-    eval_dataset=tokenized_datasets["validation"],
+    eval_dataset=tokenized_datasets["test"],
     tokenizer=processor.tokenizer,
     data_collator=collator,
     compute_metrics=compute_metrics

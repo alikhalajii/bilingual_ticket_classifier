@@ -1,8 +1,8 @@
-accelerator
 datasets
 pandas
+python_dotenv
 scikit-learn
-torch
+torch==2.8.0+cu126
 tqdm
-transformers
-wandb
+transformers==4.55.4
+wandb==0.21.1

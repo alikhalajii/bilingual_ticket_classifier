@@ -3,6 +3,9 @@ import os
 
 
 def load_wandb_config():
+    """
+    Load W&B configuration from environment variables.
+    """
     load_dotenv()
 
     return {
@@ -14,9 +17,11 @@ def load_wandb_config():
         "DATASET_NAME": os.getenv("DATASET_NAME", "ale-dp/bilingual-ticket-classification"),
 
         # Training hyperparams
-        "EPOCHS": int(os.getenv("EPOCHS", 12)),
+        "EPOCHS": int(os.getenv("EPOCHS", 15)),
         "BATCH_SIZE": int(os.getenv("BATCH_SIZE", 16)),
-        "LEARNING_RATE": float(os.getenv("LEARNING_RATE", 2e-5)),
+        "LEARNING_RATE": float(os.getenv("LEARNING_RATE", 3e-5)),
         "WEIGHT_DECAY": float(os.getenv("WEIGHT_DECAY", 0.01)),
         "WARMUP_RATIO": float(os.getenv("WARMUP_RATIO", 0.08)),
+
+        "FINETUNED_MODEL_PATH": "./models/best_model"
     }

@@ -11,6 +11,7 @@ class DataProcessor:
         self.max_length = max_length
 
     def prepare_data(self, dataset_name, seed=42, test_size=0.2):
+        """ Prepare dataset for training and evaluation. """
         raw_ds = load_dataset(dataset_name)["train"]
 
         ds_split = raw_ds.train_test_split(test_size=test_size, seed=seed)
@@ -62,6 +63,7 @@ class DataProcessor:
         return dataset_splits
 
     def get_label_maps(self):
+        """ Get label maps for queue and type labels."""
         return {
             "queue": {label: idx for idx, label in enumerate(self.label_encoder_queue.classes_)},
             "type": {label: idx for idx, label in enumerate(self.label_encoder_type.classes_)}

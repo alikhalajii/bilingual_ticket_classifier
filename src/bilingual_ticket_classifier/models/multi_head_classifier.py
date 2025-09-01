@@ -3,6 +3,7 @@ from transformers import AutoModel
 
 
 class MultiHeadTicketClassifier(nn.Module):
+    """ Multi-head classifier for ticket classification."""
     def __init__(self, model_name, num_labels_queue, num_labels_type, dropout_rate=0.1):
         super(MultiHeadTicketClassifier, self).__init__()
         self.encoder = AutoModel.from_pretrained(model_name)

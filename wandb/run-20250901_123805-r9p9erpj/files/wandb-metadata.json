@@ -1,0 +1,40 @@
+{
+  "os": "Linux-6.1.123+-x86_64-with-glibc2.35",
+  "python": "CPython 3.12.11",
+  "startedAt": "2025-09-01T12:38:05.355555Z",
+  "program": "/root/repo/bilingual_ticket_classifier/src/bilingual_ticket_classifier/training/train.py",
+  "codePath": "src/bilingual_ticket_classifier/training/train.py",
+  "codePathLocal": "src/bilingual_ticket_classifier/training/train.py",
+  "git": {
+    "remote": "https://github.com/alikhalajii/bilingual_ticket_classifier.git",
+    "commit": "62657021a350b867effadb741b0a4a0e6bc8caa7"
+  },
+  "email": "WANDB_EMAIL",
+  "root": "/root/repo/bilingual_ticket_classifier",
+  "host": "830aaf60f59c",
+  "executable": "/usr/bin/python3",
+  "cpu_count": 1,
+  "cpu_count_logical": 2,
+  "gpu": "Tesla T4",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "253055008768",
+      "used": "45823770624"
+    }
+  },
+  "memory": {
+    "total": "13608370176"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "Tesla T4",
+      "memoryTotal": "16106127360",
+      "cudaCores": 2560,
+      "architecture": "Turing",
+      "uuid": "GPU-0876e0b8-a1ad-811a-20ae-163c17f1fde5"
+    }
+  ],
+  "cudaVersion": "12.4",
+  "writerId": "cy8vk7cr3uvg4n5nqtjh03078yczgf07"
+}

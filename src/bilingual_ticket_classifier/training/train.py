@@ -1,15 +1,12 @@
 import torch
 import wandb
 from transformers import TrainingArguments, EarlyStoppingCallback
-from dotenv import load_dotenv
 
 from bilingual_ticket_classifier.processing.data_processor import DataProcessor
 from bilingual_ticket_classifier.models.multi_head_classifier import MultiHeadTicketClassifier
 from bilingual_ticket_classifier.training.trainer import MultiTaskTrainer, MultiTaskCollator, compute_metrics
 from bilingual_ticket_classifier.config.wandb_config import load_wandb_config
 from save_model import save_model
-
-load_dotenv()
 
 
 # Load W&B config from .env
@@ -37,6 +34,7 @@ collator = MultiTaskCollator(tokenizer=processor.tokenizer)
 
 training_args = TrainingArguments(
     output_dir="./results",
+    save_total_limit=1,
     eval_strategy="epoch",
     save_strategy="epoch",
     logging_strategy="steps",
@@ -54,9 +52,8 @@ training_args = TrainingArguments(
     warmup_ratio=config.get("WARMUP_RATIO", 0.08),
     lr_scheduler_type="cosine_with_restarts",
     load_best_model_at_end=True,
-    metric_for_best_model="eval_f1_queue",
-    greater_is_better=True,
-    save_total_limit=3,
+    metric_for_best_model="eval_loss",
+    greater_is_better=False,
 )
 
 trainer = MultiTaskTrainer(
@@ -71,7 +68,9 @@ trainer = MultiTaskTrainer(
 
 trainer.train()
 
-save_path = os.getenv("FINETUNED_MODEL_PATH")
+# Save model
+save_path = config["FINETUNED_MODEL_PATH"]
 
 save_model(trainer, processor, save_path=save_path)
+
 wandb.config.update({"FINETUNED_MODEL_PATH": save_path})
