@@ -12,8 +12,11 @@ def load_wandb_config():
         "RUN_NAME": os.getenv("RUN_NAME", "xlm-roberta-run"),
         "MODEL_NAME": os.getenv("MODEL_NAME", "FacebookAI/xlm-roberta-base"),
         "DATASET_NAME": os.getenv("DATASET_NAME", "ale-dp/bilingual-ticket-classification"),
-        "EPOCHS": int(os.getenv("EPOCHS", 10)),
+
+        # Training hyperparams
+        "EPOCHS": int(os.getenv("EPOCHS", 12)),
         "BATCH_SIZE": int(os.getenv("BATCH_SIZE", 16)),
         "LEARNING_RATE": float(os.getenv("LEARNING_RATE", 2e-5)),
-        "WEIGHT_DECAY": float(os.getenv("WEIGHT_DECAY", 0.01))
+        "WEIGHT_DECAY": float(os.getenv("WEIGHT_DECAY", 0.01)),
+        "WARMUP_RATIO": float(os.getenv("WARMUP_RATIO", 0.08)),
     }

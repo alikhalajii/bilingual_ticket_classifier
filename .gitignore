@@ -1,0 +1,10 @@
+.env
+.mypy_cache/
+wandb/
+.vscode/
+.venv*/
+src/*.egg-info/
+*.pyc
+__pycache__/
+results/
+models/

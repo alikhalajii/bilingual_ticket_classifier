@@ -20,7 +20,6 @@ def compute_metrics(eval_preds):
     }
 
     return metrics
-
     
 class MultiTaskCollator(DataCollatorWithPadding):
     def __call__(self, features):
@@ -46,13 +45,14 @@ class MultiTaskTrainer(Trainer):
         logits_queue = outputs["logits_queue"]
         logits_type = outputs["logits_type"]
 
-        loss_fn = torch.nn.CrossEntropyLoss()
+        loss_fn = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
         loss_queue = loss_fn(logits_queue, labels_queue)
         loss_type = loss_fn(logits_type, labels_type)
         loss = 0.6 * loss_queue + 0.4 * loss_type
 
         return (loss, outputs) if return_outputs else loss
 
+    """
     def create_scheduler(self, num_training_steps: int, optimizer=None):
         if optimizer is not None:
             self.optimizer = optimizer
@@ -64,6 +64,7 @@ class MultiTaskTrainer(Trainer):
             min_lr=1e-6
         )
         return self.lr_scheduler
+    
 
     def evaluation_loop(self, *args, **kwargs):
         output = super().evaluation_loop(*args, **kwargs)
@@ -71,3 +72,4 @@ class MultiTaskTrainer(Trainer):
         if val_loss is not None:
             self.lr_scheduler.step(val_loss)
         return output
+    """
