@@ -26,6 +26,17 @@ python src/bilingual_ticket_classifier/training/train.py
 python src/bilingual_ticket_classifier/evaluation/evaluate.py
 ```
 
-## Results
-All training runs are logged to Weights & Biases.
-[Latest W&B run](https://wandb.ai/alikhalaji-/bilingual_ticket_classifier?nw=nwuseralikhalaji)
+**Launch the Gradio Demo**
+```bash
+python demo/app.py
+```
+
+## 📊 Results
+
+All training runs are logged to **Weights & Biases** for full transparency and reproducibility.
+
+- [Latest W&B Run Dashboard](https://wandb.ai/alikhalaji-/bilingual_ticket_classifier?nw=nwuseralikhalaji)  
+  Explore training curves, evaluation metrics, and system logs.
+
+- [Summary JSON Snapshot](https://github.com/alikhalajii/bilingual_ticket_classifier/blob/main/wandb/run-20250901_123805-r9p9erpj/files/wandb-summary.json)  
+  Quick access to final metrics.

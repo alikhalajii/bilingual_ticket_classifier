@@ -9,10 +9,11 @@ results/
 models/
 tests/
 
-wandb/*
+wandb/
 !wandb/run-20250901_123805-r9p9erpj/files/
 !wandb/run-20250901_123805-r9p9erpj/files/**
 
 .cache/
 .vscode/
 *.pyc
+.gradio/

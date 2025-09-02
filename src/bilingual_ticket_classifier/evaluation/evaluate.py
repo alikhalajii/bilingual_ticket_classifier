@@ -2,6 +2,7 @@ import wandb
 from transformers import TrainingArguments, EarlyStoppingCallback
 import torch
 import os
+import json
 
 from bilingual_ticket_classifier.training.trainer import MultiTaskTrainer, MultiTaskCollator, compute_metrics
 from bilingual_ticket_classifier.processing.data_processor import DataProcessor
@@ -26,6 +27,13 @@ num_labels_type = len(processor.label_encoder_type.classes_)
 # Load model
 model_path = config["FINETUNED_MODEL_PATH"]
 encoder_path = os.path.join(model_path, "encoder")
+
+with open(os.path.join(model_path, "queue_label_map.json")) as f:
+    queue_labels = json.load(f)
+
+with open(os.path.join(model_path, "type_label_map.json")) as f:
+    type_labels = json.load(f)
+
 
 model = MultiHeadTicketClassifier(
     model_name=encoder_path,
@@ -53,4 +61,8 @@ trainer = MultiTaskTrainer(
 
 # Run evaluation
 metrics = trainer.evaluate()
+
+with open(os.path.join(model_path, "eval_metrics.json"), "w") as f:
+    json.dump(metrics, f, indent=2)
+
 print(metrics)
