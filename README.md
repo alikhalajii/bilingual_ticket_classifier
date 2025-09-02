@@ -6,6 +6,17 @@ Fine-tuned on the [ale-dp/bilingual-ticket-classification](https://huggingface.c
 
 ## ⚡ Quickstart
 
+**Clone the Repository**
+```bash
+git clone https://github.com/alikhalajii/bilingual_ticket_classifier.git
+cd bilingual_ticket_classifier
+```
+
+If you want to skip training and directly run the demo using the fine-tuned model:
+```bash
+git clone https://github.com/alikhalajii/bilingual_ticket_classifier.git && cd bilingual_ticket_classifier && git lfs install && git lfs pull
+```
+
 **Install the repository as a Python package**
     
 ```bash
